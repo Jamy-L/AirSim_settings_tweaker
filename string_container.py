@@ -375,11 +375,11 @@ void ACarPawn::setupVehicleMovementComponent()
     // Engine
     // Torque setup
     movement->EngineSetup.MaxRPM = {MaxRPM}f;
-    {{TorqueCurveString}}
+{TorqueCurveString}
 
     // Adjust the steering
     movement->SteeringCurve.GetRichCurve()->Reset();
-    {SteeringCurveString}
+{SteeringCurveString}
 
     // Transmission
     // We want 4wd

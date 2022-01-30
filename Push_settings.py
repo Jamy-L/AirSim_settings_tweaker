@@ -39,7 +39,7 @@ class Settings:
             
                  ):
         
-        self.TorqueCurve=TorqueCurve; self.MaxRPM=MaxRPM,
+        self.TorqueCurve=TorqueCurve; self.MaxRPM=MaxRPM;
         self.DampingRateFullThrottle=DampingRateFullThrottle
         self.DampingRateZeroThrottleClutchEngaged=DampingRateZeroThrottleClutchEngaged
         self.DampingRateZeroThrottleClutchDisengaged=DampingRateZeroThrottleClutchDisengaged
@@ -60,13 +60,13 @@ class Settings:
         TorqueCurveString=""
         for point_index in range(self.TorqueCurve.shape[0]):
             TorqueCurveString+=string_container.Torque_curve_elementary_string.format(
-                X=self.TorqueCurve[point_index][0],Y=self.TorqueCurve[point_index][1])
+                X='%.1f'%self.TorqueCurve[point_index][0],Y='%.1f'%self.TorqueCurve[point_index][1])
             TorqueCurveString+="\n"
             
         SteeringCurveString=""
         for point_index in range(self.SteeringCurve.shape[0]):
             SteeringCurveString+=string_container.Steering_curve_elementary_string.format(
-                X=self.SteeringCurve[point_index][0],Y=self.SteeringCurve[point_index][1])
+                X='%.1f'%self.SteeringCurve[point_index][0],Y='%.1f'%self.SteeringCurve[point_index][1])
             SteeringCurveString+="\n"
         
         self.SteeringCurveString=SteeringCurveString
@@ -101,7 +101,7 @@ class Settings:
         ----------
         adress : type Str
             Adress of the Pawn.cpp file for the vehicule you want to modify.
-            Most likely, something like "/AirSim/Unreal/Plugins/Airsim/Source/Vehicle/Car"
+            Most likely, something like "/AirSim/Unreal/Environments/Blocks/Plugins/AirSim/Source/Vehicles/Car"
             if you want to modify the Car.
             
             
@@ -117,11 +117,12 @@ class Settings:
 
         
         middle_string=string_container.middle_code.format(
-            MaxRPM=self.MaxRPM,
+            MaxRPM='%.1f'%self.MaxRPM,
             SteeringCurveString=self.SteeringCurveString,
-            FrontRearSplit=self.FrontRearSplit,
-            GearSwitchTime=self.GearSwitchTime,
-            GearAutoBoxLatency=self.GearAutoBoxLatency,
+            TorqueCurveString=self.TorqueCurveString,
+            FrontRearSplit='%.1f'%self.FrontRearSplit,
+            GearSwitchTime='%.1f'%self.GearSwitchTime,
+            GearAutoBoxLatency='%.1f'%self.GearAutoBoxLatency,
             )
         
         file.write(middle_string)
@@ -130,8 +131,8 @@ class Settings:
         file.close()
         
 
-S=Settings()
-S.push_settings(adress="G:/AirSim/Unreal/Plugins/AirSim/Source/Vehicles/Car")
+S=Settings(MaxRPM=5600)
+S.push_settings(adress="G:/AirSim/Unreal/Environments/Blocks/Plugins/AirSim/Source/Vehicles/Car")
         
 
         
